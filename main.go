@@ -1,11 +1,11 @@
+/*
+Copyright © 2025 NAME HERE <EMAIL ADDRESS>
+
+*/
 package main
 
-import (
-	"log"
-)
+import "expense-tracker/cmd"
 
 func main() {
-	if err := cmdFlags(); err != nil {
-		log.Fatalf("%v", err)
-	}
+	cmd.Execute()
 }
