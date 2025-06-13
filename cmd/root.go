@@ -61,6 +61,18 @@ var summaryCmd = &cobra.Command{
 	},
 }
 
+// delete command
+var deleteCmd = &cobra.Command{
+	Use: "delete",
+	Run: func(cmd *cobra.Command, args []string) {
+		id, err := cmd.Flags().GetInt("id")
+		if err != nil {
+			fmt.Println("failed to get id")
+		}
+		deleteExpense(id)
+	},
+}
+
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
@@ -76,10 +88,12 @@ func init() {
 	// will be global for your application.
 	rootCmd.PersistentFlags().String("description", "", "Your expense description")
 	rootCmd.PersistentFlags().String("amount", "", "Your expense amount")
+	rootCmd.PersistentFlags().Int("id", -1, "Your expense id")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.AddCommand(addCmd)
 	rootCmd.AddCommand(listCmd)
 	rootCmd.AddCommand(summaryCmd)
+	rootCmd.AddCommand(deleteCmd)
 }

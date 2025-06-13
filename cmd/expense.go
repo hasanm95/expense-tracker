@@ -57,3 +57,24 @@ func summaryExpense() {
 	}
 	fmt.Printf("Total Expenses: $%v\n", sum)
 }
+
+func deleteExpense(id int) {
+	var indexToRemove = -1
+	for i, exp := range types.AllExpense {
+		if id == exp.ID {
+			indexToRemove = i
+			break
+		}
+	}
+
+	if indexToRemove == -1 {
+		fmt.Printf("Expense with ID %d not found", id)
+	}
+	types.AllExpense = append(types.AllExpense[:indexToRemove], types.AllExpense[indexToRemove+1:]...)
+
+	if err := storage.Storage(); err != nil {
+		fmt.Printf("Failed to store %v", err)
+	}
+
+	fmt.Printf("Task removed successfully (ID: %d)\n", id)
+}
