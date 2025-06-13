@@ -6,7 +6,7 @@ type Expense struct {
 	ID          int
 	Description string
 	Amount      string
-	CreatedAt   time.Time
+	Date        time.Time
 }
 
 var AllExpense []Expense

@@ -25,7 +25,7 @@ to quickly create a Cobra application.`,
 	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
-// addCmd
+// add Command
 var addCmd = &cobra.Command{
 	Use: "add",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -42,6 +42,22 @@ var addCmd = &cobra.Command{
 		if desc != "" && amount != "" {
 			AddExpense(desc, amount)
 		}
+	},
+}
+
+// list command
+var listCmd = &cobra.Command{
+	Use: "list",
+	Run: func(cmd *cobra.Command, args []string) {
+		listExpense()
+	},
+}
+
+// summary command
+var summaryCmd = &cobra.Command{
+	Use: "summary",
+	Run: func(cmd *cobra.Command, args []string) {
+		listExpense()
 	},
 }
 
@@ -63,6 +79,7 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	rootCmd.AddCommand(addCmd)
+	rootCmd.AddCommand(listCmd)
+	rootCmd.AddCommand(summaryCmd)
 }
