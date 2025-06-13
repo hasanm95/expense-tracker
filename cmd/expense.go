@@ -5,6 +5,7 @@ import (
 	"expense-tracker/types"
 	"fmt"
 	"os"
+	"regexp"
 	"strconv"
 	"time"
 
@@ -41,4 +42,18 @@ func listExpense() {
 	}
 
 	t.Render()
+}
+
+func summaryExpense() {
+	var sum int = 0
+	for _, exp := range types.AllExpense {
+		re := regexp.MustCompile(`[^0-9.]`)
+		amount := re.ReplaceAllString(exp.Amount, "")
+		val, err := strconv.Atoi(amount)
+		if err != nil {
+			fmt.Printf("Falied to conver amount: %v\n", err)
+		}
+		sum += val
+	}
+	fmt.Printf("Total Expenses: $%v\n", sum)
 }

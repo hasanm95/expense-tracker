@@ -57,7 +57,7 @@ var listCmd = &cobra.Command{
 var summaryCmd = &cobra.Command{
 	Use: "summary",
 	Run: func(cmd *cobra.Command, args []string) {
-		listExpense()
+		summaryExpense()
 	},
 }
 
